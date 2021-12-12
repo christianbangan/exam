@@ -1,0 +1,159 @@
+﻿@model WebApplication1.Models.Movie
+
+@{
+    ViewBag.Title = "AddMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    if (TempData["hideError"] != null && TempData["validation"] != null && TempData["flag"] != null)
+    {
+        if (int.Parse(TempData["flag"].ToString()) == 1)
+        {
+            <div class="alert alert-success" id="message" role="alert" hidden="@bool.Parse(TempData["hideError"].ToString())">
+                <a class="close" data-dismiss="alert">×</a>
+                <p>@TempData["validation"].ToString()</p>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" id="message" role="alert" hidden="@bool.Parse(TempData["hideError"].ToString())">
+                <a class="close" data-dismiss="alert">×</a>
+                <p>@TempData["validation"].ToString()</p>
+            </div>
+        }
+
+    }
+
+}
+
+
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/custom_script/screen.js")" type="text/javascript"></script>
+}
+
+@using (Html.BeginForm("AddMoviePost", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container" style="padding-top: 20px">
+        <h3>Add Movie</h3>
+        <form>
+            <div class="form-group">
+                <label for="ItemName">Movie Title</label>
+                <input type="text" class="form-control-file" name="Title" required>
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <input type="text" class="form-control-file" name="Description" required>
+            </div>
+            <div class="form-group">
+                <label for="ImagePath">Image</label>
+                <input type="file" class="form-control-file" name="file" required>
+            </div>
+
+            <div class="seatStructure">
+
+                <table id="seatsBlock">
+                    <tr>
+                        Select seats:
+                    </tr>
+                    <tr>
+                        <td rowspan="20">
+                            <br />
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td></td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                    </tr>
+
+                    <tr>
+                        <td>A</td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A1"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A2"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A3"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A4"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A5"></td>
+                        <td class="seatGap"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A6"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A7"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A8"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A9"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A10"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A11"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="A12"></td>
+                    </tr>
+
+                    <tr>
+                        <td>B</td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B1"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B2"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B3"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B4"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B5"></td>
+                        <td></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B6"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B7"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B8"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B9"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B10"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B11"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="B12"></td>
+                    </tr>
+
+                    <tr>
+                        <td>C</td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C1"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C2"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C3"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C4"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C5"></td>
+                        <td></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C6"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C7"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C8"></td>
+                        <td><input type="checkbox" class="seats" name="seats" value="C9"></td>
+                        <td><input type="checkbox" class="seats" value="C10"></td>
+                        <td><input type="checkbox" class="seats" value="C11"></td>
+                        <td><input type="checkbox" class="seats" value="C12"></td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div>
+                <br />
+                Select Schedules:
+                <br />
+                <input type="checkbox" name="schedule" value="10:00">10:00AM
+                <input type="checkbox" name="schedule" value="12:00">12:00PM
+                <input type="checkbox" name="schedule" value="14:00">02:00PM
+                <input type="checkbox" name="schedule" value="16:00">04:00PM
+                <input type="checkbox" name="schedule" value="18:00">06:00PM
+
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+
+
+}
